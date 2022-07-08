@@ -404,12 +404,11 @@ elif page==pages[4]:
     cl_DTC = load('cl_DTC.joblib') 
     cl_RFC = load('cl_RFC.joblib') 
     cl_AC = load('cl_AC.joblib') 
-    cl_BC = load('cl_BC.joblib') 
 
     cl_LR_final = load('cl_LR_final.joblib') 
     cl_RFC_final = load('cl_RFC_final.joblib') 
 
-    model_choisi = st.selectbox(label = "Choix du modèle", options = ['Régression Logistique', 'SVM', 'KNN', 'Decision Tree', 'Forêt aléatoire', 'Adaboost', 'Bagging'])
+    model_choisi = st.selectbox(label = "Choix du modèle", options = ['Régression Logistique', 'SVM', 'KNN', 'Decision Tree', 'Forêt aléatoire', 'Adaboost'])
     def test_model(model_choisi): 
         if model_choisi == 'Régression Logistique':
             model = cl_LR
@@ -423,8 +422,6 @@ elif page==pages[4]:
             model = cl_RFC
         elif model_choisi == 'Adaboost':
             model = cl_AC
-        elif model_choisi == 'Bagging':
-            model = cl_BC
         score = model.score(X_test,y_test)
         return score
 
@@ -441,8 +438,6 @@ elif page==pages[4]:
             avantages = st.markdown("<font color='green'>Avantages : Score le plus élevé, supérieur à 0.8</font>", unsafe_allow_html=True)
         elif model_choisi == 'Adaboost':
             avantages = ""
-        elif model_choisi == 'Bagging':
-            avantages = st.markdown("<font color='green'>Avantages : Score supérieur à 0.8</font>", unsafe_allow_html=True)
         return avantages
 
     def inconvenients_model(model_choisi): 
@@ -458,8 +453,6 @@ elif page==pages[4]:
             inconvenients = st.markdown("<font color='red'>Inconvénients : Interprétabilité moins bonne qu'une régression logistique</font>", unsafe_allow_html=True)
         elif model_choisi == 'Adaboost':
             inconvenients = st.markdown("<font color='red'>Inconvénients : Score inférieur à 0.8 (trop faible par rapport aux autres modèles)</font>", unsafe_allow_html=True)
-        elif model_choisi == 'Bagging':
-            inconvenients = st.markdown("<font color='red'>Inconvénients : Score qui ne dépasse pas un modèle similaire et légèrement plus rapide : le Random Forest</font>", unsafe_allow_html=True)
         return inconvenients
       
     st.write("Test score", test_model(model_choisi))
