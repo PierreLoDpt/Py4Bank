@@ -400,7 +400,6 @@ elif page==pages[4]:
     # Chargement des modèles
     cl_LR = load('cl_LR.joblib') 
     cl_SVM = load('cl_SVM.joblib') 
-    cl_KNN = load('cl_KNN.joblib') 
     cl_DTC = load('cl_DTC.joblib') 
     cl_RFC = load('cl_RFC.joblib') 
     cl_AC = load('cl_AC.joblib') 
@@ -408,14 +407,12 @@ elif page==pages[4]:
     cl_LR_final = load('cl_LR_final.joblib') 
     cl_RFC_final = load('cl_RFC_final.joblib') 
 
-    model_choisi = st.selectbox(label = "Choix du modèle", options = ['Régression Logistique', 'SVM', 'KNN', 'Decision Tree', 'Forêt aléatoire', 'Adaboost'])
+    model_choisi = st.selectbox(label = "Choix du modèle", options = ['Régression Logistique', 'SVM', 'Decision Tree', 'Forêt aléatoire', 'Adaboost'])
     def test_model(model_choisi): 
         if model_choisi == 'Régression Logistique':
             model = cl_LR
         elif model_choisi == 'SVM':
             model = cl_SVM
-        elif model_choisi == 'KNN':
-            model = cl_KNN
         elif model_choisi == 'Decision Tree': 
             model = cl_DTC
         elif model_choisi == 'Forêt aléatoire':
@@ -430,8 +427,6 @@ elif page==pages[4]:
             avantages = st.markdown("<font color='green'>Avantages : Score supérieur à 0.8, interprétabilité excellente, temps d’entraînement rapide</font>", unsafe_allow_html=True)
         elif model_choisi == 'SVM':
             avantages = st.markdown("<font color='green'>Avantages : Score supérieur à 0.8</font>", unsafe_allow_html=True)
-        elif model_choisi == 'KNN':
-            avantages = ""
         elif model_choisi == 'Decision Tree': 
             avantages = ""
         elif model_choisi == 'Forêt aléatoire':
@@ -445,8 +440,6 @@ elif page==pages[4]:
             inconvenients = st.markdown("<font color='red'>Inconvénients : Score légèrement inférieur à d'autres modèles comme la Random Forest</font>", unsafe_allow_html=True)
         elif model_choisi == 'SVM':
             inconvenients = st.markdown("<font color='red'>Inconvénients : difficulté à identifier les bonnes valeurs des paramètres, difficulté d’interprétations (ex. pertinence des variables), temps d’entraînement excessivement long</font>", unsafe_allow_html=True)
-        elif model_choisi == 'KNN':
-            inconvenients = st.markdown("<font color='red'>Inconvénients : Score inférieur à 0.8 (trop faible par rapport aux autres modèles)</font>", unsafe_allow_html=True)
         elif model_choisi == 'Decision Tree': 
             inconvenients = st.markdown("<font color='red'>Inconvénients : Score inférieur à 0.8 (trop faible par rapport aux autres modèles)</font>", unsafe_allow_html=True)
         elif model_choisi == 'Forêt aléatoire':
